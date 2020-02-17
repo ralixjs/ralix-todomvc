@@ -12,11 +12,8 @@ gem 'webpacker', '~> 4.2.2'
 gem 'turbolinks', '~> 5.2'
 gem 'sassc-rails', '~> 2.1.0'
 
-group :development, :test do
-  gem 'byebug'
-end
-
 group :development do
+  gem 'byebug'
   gem 'web-console', '~> 3.7'
   gem 'listen', '~> 3.1'
 end
