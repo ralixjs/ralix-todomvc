@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo -e "=> Starting application ...\n"
+
+# start the assets dev server
+bin/webpack-dev-server &
+
+# start the app server
+bundle exec rails s -p 5000 -b 0.0.0.0

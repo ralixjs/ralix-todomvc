@@ -9,7 +9,7 @@ import AppCtrl       from 'controllers/app'
 const App = new RalixApp({
   rails_ujs: Rails,
   routes: {
-    '/.*':        AppCtrl
+    '/.*': AppCtrl
   }
 })
 
