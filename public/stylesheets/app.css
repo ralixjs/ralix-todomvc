@@ -361,20 +361,20 @@ html .clear-completed:active {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   .toggle-all,
   .todo-list li .toggle {
-  background: none;
+    background: none;
   }
 
   .todo-list li .toggle {
-  height: 40px;
+    height: 40px;
   }
 }
 
 @media (max-width: 430px) {
   .footer {
-  height: 50px;
+    height: 50px;
   }
 
   .filters {
-  bottom: 10px;
+    bottom: 10px;
   }
 }
