@@ -1,6 +1,5 @@
 // Dependencies
 import Rails         from '@rails/ujs'
-import Turbolinks    from 'turbolinks'
 import { RalixApp }  from 'ralix'
 
 // Controllers
@@ -14,5 +13,4 @@ const App = new RalixApp({
 })
 
 Rails.start()
-Turbolinks.start()
 App.start()
