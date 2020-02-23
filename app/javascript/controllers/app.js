@@ -1,6 +1,30 @@
 export default class AppCtrl {
   constructor() {
     this.loadList('all')
+
+    window.addEventListener('click', function(e){
+      const edit = find('input.edit')
+      if (edit && !edit.contains(e.target)){
+        const id    = edit.parentElement.id
+        const value = edit.value
+        let todo    = getList('all')
+        removeClass(`#${id}`, 'editing')
+    		edit.remove()
+
+        if (value == ''){
+          destroy(id.replace('li_', ''))
+        } else {
+          todo.forEach((obj, index) => {
+            if (obj.id == id.replace('li_', '')){
+              todo[index]['value'] = value
+              find(`#${id} label`).textContent = value
+              setList(todo)
+              reloadLeft()
+            }
+          })
+        }
+      }
+    })
   }
 
   enterSubmit() {
@@ -47,8 +71,19 @@ export default class AppCtrl {
     reloadLeft()
   }
 
+  editItem(id) {
+    const value = find(`#li_${id} label`).textContent
+    const input = document.createElement('input');
+
+    addClass(`#li_${id}`, 'editing')
+		input.className = 'edit'
+    input.value = value
+    find(`#li_${id}`).appendChild(input)
+		input.focus();
+  }
+
   addItem(id, completed, value) {
-    insertHTML('ul', `<li id="li_${id}" class="${completed}"><div class="view">${this.checkBox(id, completed)}<label>${value}</label><button class="destroy" onclick="destroy('${id}')"></button></div></li>`, 'end')
+    insertHTML('ul', `<li id="li_${id}" class="${completed}"><div class="view">${this.checkBox(id, completed)}<label ondblclick=editItem('${id}')>${value}</label><button class="destroy" onclick="destroy('${id}')"></button></div></li>`, 'end')
   }
 
   checkBox(id, completed) {
