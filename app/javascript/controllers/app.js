@@ -2,20 +2,20 @@ export default class AppCtrl {
   constructor() {
     this.loadList('all')
 
-    window.addEventListener('click', function(e){
+    window.addEventListener('click', function(e) {
       const edit = find('input.edit')
-      if (edit && !edit.contains(e.target)){
+      if (edit && !edit.contains(e.target)) {
         const id    = edit.parentElement.id
         const value = edit.value
         let todo    = getList('all')
         removeClass(`#${id}`, 'editing')
     		edit.remove()
 
-        if (value == ''){
+        if (value == '') {
           destroy(id.replace('li_', ''))
         } else {
           todo.forEach((obj, index) => {
-            if (obj.id == id.replace('li_', '')){
+            if (obj.id == id.replace('li_', '')) {
               todo[index]['value'] = value
               find(`#${id} label`).textContent = value
               setList(todo)
@@ -44,14 +44,36 @@ export default class AppCtrl {
     }
   }
 
-  toggleCheck(id){
+  toggleCheckAll() {
+    let all
+
+    if (find('.todo-list li:not(.completed)'))
+      all = findAll('.todo-list li:not(.completed)')
+    else
+      all = findAll('.todo-list li.completed')
+
+    all.forEach((item, i) => {
+      toggleClass(`#${item.id}`, 'completed')
+      find(`#${item.id} input`).remove()
+      insertHTML(`#${item.id} div`, checkBox(item.id, find(`#${item.id}`).className), 'begin')
+    })
+
+    let todo = getList('all')
+    todo.forEach((obj, index) => {
+      todo[index]['class'] = find('.todo-list li:not(.completed)') ? '' : 'completed'
+    })
+    setList(todo)
+    reloadLeft()
+  }
+
+  toggleCheck(id) {
     toggleClass(`#li_${id}`, 'completed')
     find(`#li_${id} input`).remove()
     insertHTML(`#li_${id} div`, checkBox(id, find(`#li_${id}`).className), 'begin')
     let todo = getList('all')
 
     todo.forEach((obj, index) => {
-      if (obj.id == id.replace('li_', '')){
+      if (obj.id == id.replace('li_', '')) {
         todo[index]['class'] = find(`#li_${id}`).className
         setList(todo)
         reloadLeft()
