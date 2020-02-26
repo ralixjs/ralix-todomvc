@@ -2,6 +2,42 @@ export default class AppCtrl {
   constructor() {
     this.loadList('all')
 
+    window.addEventListener('keyup', function(e) {
+      if (e.keyCode !== 13) return
+
+      if ((find('.new-todo') == e.target) || (find('.edit') == e.target)) {
+        const edit = find('input.edit')
+        let id     = edit ? edit.parentElement.id : ''
+
+        if (e.target.value == '') {
+          if (edit == e.target) destroy(id.replace('li_', ''))
+        } else {
+          let todo = getList('all')
+
+          if (edit == e.target) {
+            const value = edit.value
+            removeClass(`#${id}`, 'editing')
+            edit.remove()
+            todo.forEach((obj, index) => {
+              if (obj.id == id.replace('li_', '')) {
+                todo[index]['value'] = value
+                find(`#${id} label`).textContent = value
+              }
+           })
+          } else {
+            id = Date.now().toString()
+            const value = e.target.value
+            todo.push({ id: `${id}`, class: '', value: value })
+            e.target.value = ''
+            if (find('.selected').text != 'Completed') addItem(id, '', value)
+          }
+
+          setList(todo)
+          reloadLeft()
+        }
+      }
+    })
+
     window.addEventListener('click', function(e) {
       const edit = find('input.edit')
       if (edit && !edit.contains(e.target)) {
@@ -25,23 +61,6 @@ export default class AppCtrl {
         }
       }
     })
-  }
-
-  enterSubmit() {
-    if (currentEvent().keyCode === 13 && currentElement().value != '') {
-      let todo    = getList('all')
-      const id    = Date.now().toString()
-      const value = currentElement().value
-      const obj   = { id: `${id}`, class: '', value: value }
-
-      todo.push(obj)
-      setList(todo)
-      currentElement().value = ''
-      reloadLeft()
-
-      if (find('.selected').text != 'Completed')
-        addItem(id, '', value)
-    }
   }
 
   toggleCheckAll() {
