@@ -5812,10 +5812,10 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
   integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
 
-ralix@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/ralix/-/ralix-0.5.1.tgz#c0b31c2672a55752f5e6f7f18be54a109a62d64e"
-  integrity sha512-sZwVYgUzf07F863vBAQIO/X0m3CoOySSLpdTwqs0oUspJVqaEhTLAFMGWmPYxY2YLvww91dOe6z8Gr/ikQQ/Tg==
+ralix@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/ralix/-/ralix-0.5.2.tgz#832d47e14a76cf617af3e7f5d8ba976ab8530c96"
+  integrity sha512-NnLnUhwpDyRZkLNPPQ+Y46lsj68jb8DHhoIFPUblaqx0wlqW6CHSZEjDWTVNf97XUKfXx0oFmoEOcdnPLpjEzg==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"

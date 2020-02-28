@@ -2,7 +2,7 @@ export default class AppCtrl {
   constructor() {
     this.loadList('all')
 
-    window.addEventListener('keyup', function(e) {
+    on(window, 'keyup', (e) => {
       if (e.keyCode !== 13) return
 
       if ((find('.new-todo') == e.target) || (find('.edit') == e.target)) {
@@ -38,14 +38,14 @@ export default class AppCtrl {
       }
     })
 
-    window.addEventListener('click', function(e) {
+    on(window, 'click', (e) => {
       const edit = find('input.edit')
       if (edit && !edit.contains(e.target)) {
         const id    = edit.parentElement.id
         const value = edit.value
         let todo    = getList('all')
         removeClass(`#${id}`, 'editing')
-    		edit.remove()
+        edit.remove()
 
         if (value == '') {
           destroy(id.replace('li_', ''))
@@ -114,13 +114,13 @@ export default class AppCtrl {
 
   editItem(id) {
     const value = find(`#li_${id} label`).textContent
-    const input = document.createElement('input');
+    const input = document.createElement('input')
 
     addClass(`#li_${id}`, 'editing')
-		input.className = 'edit'
+    input.className = 'edit'
     input.value = value
     find(`#li_${id}`).appendChild(input)
-		input.focus();
+    input.focus()
   }
 
   addItem(id, completed, value) {
