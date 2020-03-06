@@ -2,40 +2,19 @@ export default class AppCtrl {
   constructor() {
     this.loadList('all')
 
-    on(window, 'keyup', (e) => {
-      if (e.keyCode !== 13) return
+    on('.new-todo', 'keyup', (e) => {
+      if (e.code !== 'Enter' || e.target.value == '')  return
 
-      if ((find('.new-todo') == e.target) || (find('.edit') == e.target)) {
-        const edit = find('input.edit')
-        let id     = edit ? edit.parentElement.id : ''
+      const id    = Date.now().toString()
+      const value = e.target.value
+      let todo    = getList('all')
 
-        if (e.target.value == '') {
-          if (edit == e.target) destroy(id.replace('li_', ''))
-        } else {
-          let todo = getList('all')
+      todo.push({ id: `${id}`, class: '', value: value })
+      e.target.value = ''
+      if (find('.selected').text != 'Completed') addItem(id, '', value)
 
-          if (edit == e.target) {
-            const value = edit.value
-            removeClass(`#${id}`, 'editing')
-            edit.remove()
-            todo.forEach((obj, index) => {
-              if (obj.id == id.replace('li_', '')) {
-                todo[index]['value'] = value
-                find(`#${id} label`).textContent = value
-              }
-           })
-          } else {
-            id = Date.now().toString()
-            const value = e.target.value
-            todo.push({ id: `${id}`, class: '', value: value })
-            e.target.value = ''
-            if (find('.selected').text != 'Completed') addItem(id, '', value)
-          }
-
-          setList(todo)
-          reloadLeft()
-        }
-      }
+      setList(todo)
+      reloadLeft()
     })
 
     on(window, 'click', (e) => {
@@ -121,6 +100,27 @@ export default class AppCtrl {
     input.value = value
     find(`#li_${id}`).appendChild(input)
     input.focus()
+
+    on(input, 'keyup', (e) => {
+      if (e.code !== 'Enter') return
+
+      if (input.value == '') {
+        destroy(id.replace('li_', ''))
+      } else {
+        let todo = getList('all')
+        const value = input.value
+
+        removeClass(`#li_${id}`, 'editing')
+        input.remove()
+        todo.forEach((obj, index) => {
+          if (obj.id == id) {
+            todo[index]['value'] = value
+            find(`#li_${id} label`).textContent = value
+          }
+        })
+        setList(todo)
+      }
+    })
   }
 
   addItem(id, completed, value) {
