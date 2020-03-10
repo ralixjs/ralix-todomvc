@@ -1,5 +1,8 @@
+import Storage from 'components/storage'
+
 export default class AppCtrl {
   constructor() {
+    this.storage = new Storage()
     this.loadList('all')
 
     on('.new-todo', 'keyup', (e) => {
@@ -7,14 +10,14 @@ export default class AppCtrl {
 
       const id    = Date.now().toString()
       const value = e.target.value
-      let todo    = getList('all')
+      let todo    = getList()
 
       todo.push({ id: `${id}`, class: '', value: value })
       e.target.value = ''
       if (find('.selected').text != 'Completed') addItem(id, '', value)
 
-      setList(todo)
-      reloadLeft()
+      this.storage.set(todo)
+      updateCounter()
     })
 
     on(window, 'click', (e) => {
@@ -22,21 +25,20 @@ export default class AppCtrl {
       if (edit && !edit.contains(e.target)) {
         const id    = edit.parentElement.id
         const value = edit.value
-        let todo    = getList('all')
         removeClass(`#${id}`, 'editing')
         edit.remove()
 
         if (value == '') {
           destroy(id.replace('li_', ''))
         } else {
-          todo.forEach((obj, index) => {
+          const todo = iterate(this.getList(), (obj, index, list) => {
             if (obj.id == id.replace('li_', '')) {
-              todo[index]['value'] = value
+              list[index]['value'] = value
               find(`#${id} label`).textContent = value
-              setList(todo)
-              reloadLeft()
             }
           })
+          this.storage.set(todo)
+          updateCounter()
         }
       }
     })
@@ -50,45 +52,45 @@ export default class AppCtrl {
     else
       all = findAll('.todo-list li.completed')
 
-    all.forEach((item, i) => {
-      toggleClass(`#${item.id}`, 'completed')
-      find(`#${item.id} input`).remove()
-      insertHTML(`#${item.id} div`, checkBox(item.id, find(`#${item.id}`).className), 'begin')
+    iterate(all, (obj) => {
+      toggleClass(`#${obj.id}`, 'completed')
+      find(`#${obj.id} input`).remove()
+      insertHTML(`#${obj.id} div`, checkBox(obj.id, find(`#${obj.id}`).className), 'begin')
     })
 
-    let todo = getList('all')
-    todo.forEach((obj, index) => {
-      todo[index]['class'] = find('.todo-list li:not(.completed)') ? '' : 'completed'
+    const todo = iterate(getList(), (obj, index, list) => {
+      list[index]['class'] = find('.todo-list li:not(.completed)') ? '' : 'completed'
     })
-    setList(todo)
-    reloadLeft()
+
+    this.storage.set(todo)
+    updateCounter()
   }
 
   toggleCheck(id) {
     toggleClass(`#li_${id}`, 'completed')
     find(`#li_${id} input`).remove()
     insertHTML(`#li_${id} div`, checkBox(id, find(`#li_${id}`).className), 'begin')
-    let todo = getList('all')
 
-    todo.forEach((obj, index) => {
+    const todo = iterate(getList(), (obj, index, list) => {
       if (obj.id == id.replace('li_', '')) {
-        todo[index]['class'] = find(`#li_${id}`).className
-        setList(todo)
-        reloadLeft()
+        list[index]['class'] = find(`#li_${id}`).className
       }
     })
+
+    this.storage.set(todo)
+    updateCounter()
   }
 
   destroy(id) {
     find(`#li_${id}`).remove()
-    let todo = getList('all')
 
-    todo.forEach((obj, index) => {
+    const list = iterate(getList(), (obj, index, list) => {
       if (obj.id == id.replace('li_', ''))
-        todo.splice(index, 1)
+        list.splice(index, 1)
     })
-    setList(todo)
-    reloadLeft()
+
+    this.storage.set(list)
+    updateCounter()
   }
 
   editItem(id) {
@@ -107,18 +109,18 @@ export default class AppCtrl {
       if (input.value == '') {
         destroy(id.replace('li_', ''))
       } else {
-        let todo = getList('all')
         const value = input.value
-
         removeClass(`#li_${id}`, 'editing')
         input.remove()
-        todo.forEach((obj, index) => {
+
+        const list = iterate(getList(), (obj, index, list) => {
           if (obj.id == id) {
-            todo[index]['value'] = value
+            list[index]['value'] = value
             find(`#li_${id} label`).textContent = value
           }
         })
-        setList(todo)
+
+        this.storage.set(list)
       }
     })
   }
@@ -133,8 +135,10 @@ export default class AppCtrl {
   }
 
   clearCompleted() {
-    findAll('.completed').forEach((obj) => { obj.remove() })
-    setList(getList('active'))
+    iterate(findAll('.completed'), (obj) => {
+      obj.remove()
+    })
+    this.storage.set(getList('active'))
   }
 
   loadList(list) {
@@ -142,13 +146,14 @@ export default class AppCtrl {
     insertHTML('ul', '')
     addClass(`a[onclick="loadList('${list}')"]`, 'selected')
 
-    this.getList(list).forEach((obj) => {
+    this.iterate(this.getList(list), (obj) => {
       this.addItem(obj.id, obj.class, obj.value)
     })
-    this.reloadLeft()
+
+    this.updateCounter()
   }
 
-  reloadLeft() {
+  updateCounter() {
     const left = this.getList('active').length
 
     if (left)
@@ -157,16 +162,20 @@ export default class AppCtrl {
       insertHTML('.todo-count', '')
   }
 
-  getList(list) {
-    const todo = JSON.parse(sessionStorage.getItem("todo")) || []
+  iterate(list, callback) {
+    list.forEach((obj, index) => {
+      callback(obj, index, list)
+    })
+
+    return list
+  }
+
+  getList(list = 'all') {
+    const todo = this.storage.get()
 
     if (list == 'active')    return todo.filter(li => li['class'] == '')
     if (list == 'completed') return todo.filter(li => li['class'] != '')
 
     return todo
-  }
-
-  setList(list) {
-    sessionStorage.setItem('todo', JSON.stringify(list))
   }
 }
