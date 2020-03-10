@@ -27,9 +27,9 @@ export default class AppCtrl {
     removeClass(`#li_${id}`, 'editing')
     edit.remove()
 
-    if (value == '')
+    if (value == '') {
       this.destroyItem(id)
-    else {
+    } else {
       find(`#li_${id} label`).textContent = value
       updateItem(id)
     }
@@ -48,9 +48,10 @@ export default class AppCtrl {
   createItem(value) {
     const id = Date.now().toString()
     let todo = getList()
-
     todo.push({ id: `${id}`, class: '', value: value })
-    if (find('.selected').text != 'Completed') this.list.addItem(id, '', value)
+
+    if (find('.selected').text != 'Completed')
+      this.list.addItem(id, '', value)
 
     this.storage.set(todo)
     this.list.updateCounter(this.getList('active').length)
@@ -58,12 +59,12 @@ export default class AppCtrl {
 
   destroyItem(id) {
     this.list.removeItem(id)
-    const list = iterate(getList(), (obj, index, list) => {
+    const todo = iterate(getList(), (obj, index, list) => {
       if (obj.id == id.replace('li_', ''))
-      list.splice(index, 1)
+        list.splice(index, 1)
     })
 
-    this.storage.set(list)
+    this.storage.set(todo)
     this.list.updateCounter(this.getList('active').length)
   }
 
@@ -112,7 +113,7 @@ export default class AppCtrl {
     this.list.updateCounter(this.getList('active').length)
   }
 
-  clearCompleted(){
+  clearCompleted() {
     this.list.removeCompleted()
     this.storage.set(getList('active'))
   }
