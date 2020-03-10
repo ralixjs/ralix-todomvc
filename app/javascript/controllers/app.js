@@ -1,8 +1,10 @@
 import Storage from 'components/storage'
+import List    from 'components/list'
 
 export default class AppCtrl {
   constructor() {
     this.storage = new Storage()
+    this.list    = new List()
     this.loadList('all')
 
     on('.new-todo', 'keyup', (e) => {
@@ -26,7 +28,7 @@ export default class AppCtrl {
     edit.remove()
 
     if (value == '')
-      destroyItem(id)
+      this.destroyItem(id)
     else {
       find(`#li_${id} label`).textContent = value
       updateItem(id)
@@ -48,58 +50,21 @@ export default class AppCtrl {
     let todo = getList()
 
     todo.push({ id: `${id}`, class: '', value: value })
-    if (find('.selected').text != 'Completed') addItem(id, '', value)
+    if (find('.selected').text != 'Completed') this.list.addItem(id, '', value)
 
     this.storage.set(todo)
-    updateCounter()
-  }
-
-  toggleCheckAll() {
-    let all
-
-    if (find('.todo-list li:not(.completed)'))
-      all = findAll('.todo-list li:not(.completed)')
-    else
-      all = findAll('.todo-list li.completed')
-
-    iterate(all, (obj) => { toggleElement(obj.id.replace('li_', '')) })
-
-    const todo = iterate(getList(), (obj, index, list) => {
-      list[index]['class'] = find('.todo-list li:not(.completed)') ? '' : 'completed'
-    })
-
-    this.storage.set(todo)
-    updateCounter()
-  }
-
-  toggleElement(id) {
-    toggleClass(`#li_${id}`, 'completed')
-    find(`#li_${id} input`).remove()
-    insertHTML(`#li_${id} div`, this.checkBox(id, find(`#li_${id}`).className), 'begin')
-  }
-
-  toggleCheck(id) {
-    toggleElement(id)
-    const todo = iterate(getList(), (obj, index, list) => {
-      if (obj.id == id.replace('li_', '')) {
-        list[index]['class'] = find(`#li_${id}`).className
-      }
-    })
-
-    this.storage.set(todo)
-    updateCounter()
+    this.list.updateCounter(this.getList('active').length)
   }
 
   destroyItem(id) {
-    find(`#li_${id}`).remove()
-
+    this.list.removeItem(id)
     const list = iterate(getList(), (obj, index, list) => {
       if (obj.id == id.replace('li_', ''))
-        list.splice(index, 1)
+      list.splice(index, 1)
     })
 
     this.storage.set(list)
-    updateCounter()
+    this.list.updateCounter(this.getList('active').length)
   }
 
   editItem(id) {
@@ -116,7 +81,7 @@ export default class AppCtrl {
       if (e.code !== 'Enter') return
 
       if (input.value == '') {
-        destroyItem(id.replace('li_', ''))
+        this.destroyItem(id.replace('li_', ''))
       } else {
         removeClass(`#li_${id}`, 'editing')
         find(`#li_${id} label`).textContent = input.value
@@ -126,39 +91,35 @@ export default class AppCtrl {
     })
   }
 
-  addItem(id, completed, value) {
-    insertHTML('ul', `<li id="li_${id}" class="${completed}"><div class="view">${this.checkBox(id, completed)}<label ondblclick=editItem('${id}')>${value}</label><button class="destroy" onclick="destroyItem('${id}')"></button></div></li>`, 'end')
+  toggleCheck(id = '') {
+    if (id == '') {
+      let all
+      if (find('.todo-list li:not(.completed)'))
+        all = findAll('.todo-list li:not(.completed)')
+      else
+        all = findAll('.todo-list li.completed')
+
+      iterate(all, (obj) => { this.list.toggleElement(obj.id.replace('li_', '')) })
+    } else {
+      this.list.toggleElement(id)
+    }
+
+    const todo = iterate(getList(), (obj, index, list) => {
+      list[index]['class'] = find(`#li_${obj.id}`).className
+    })
+
+    this.storage.set(todo)
+    this.list.updateCounter(this.getList('active').length)
   }
 
-  checkBox(id, completed) {
-    const checked = completed != '' ? 'checked' : ''
-    return `<input class="toggle" type="checkbox" onclick="toggleCheck('${id}')" ${checked}>`
-  }
-
-  clearCompleted() {
-    iterate(findAll('.completed'), (obj) => { obj.remove() })
+  clearCompleted(){
+    this.list.removeCompleted()
     this.storage.set(getList('active'))
   }
 
   loadList(list) {
-    removeClass('.selected', 'selected')
-    insertHTML('ul', '')
-    addClass(`a[onclick="loadList('${list}')"]`, 'selected')
-
-    this.iterate(this.getList(list), (obj) => {
-      this.addItem(obj.id, obj.class, obj.value)
-    })
-
-    this.updateCounter()
-  }
-
-  updateCounter() {
-    const left = this.getList('active').length
-
-    if (left)
-      insertHTML('.todo-count', `<strong>${left} items left</strong>`)
-    else
-      insertHTML('.todo-count', '')
+    this.list.load(this.getList(list), list)
+    this.list.updateCounter(this.getList('active').length)
   }
 
   iterate(list, callback) {
