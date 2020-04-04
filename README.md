@@ -2,6 +2,8 @@
 
 > Ralix TodoMVC implementation example
 
+See 🌐 [live version](https://ralix-todomvc.herokuapp.com).
+
 ## Dependencies
 
 - Ruby
