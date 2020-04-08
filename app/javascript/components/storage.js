@@ -4,10 +4,10 @@ export default class Storage {
   }
 
   get() {
-    return JSON.parse(sessionStorage.getItem(this.db)) || []
+    return JSON.parse(localStorage.getItem(this.db)) || []
   }
 
   set(list) {
-    sessionStorage.setItem(this.db, JSON.stringify(list))
+    localStorage.setItem(this.db, JSON.stringify(list))
   }
 }
