@@ -6035,7 +6035,7 @@ querystringify@^2.1.1:
 
 "ralix@github:ralixjs/ralix#templates":
   version "0.5.3"
-  resolved "https://codeload.github.com/ralixjs/ralix/tar.gz/84a11e4fb13b0da3efbe2511c613f773725a7953"
+  resolved "https://codeload.github.com/ralixjs/ralix/tar.gz/f1d9e10afe43928eab61c36a3d762d88d6bd55b5"
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
