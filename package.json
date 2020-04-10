@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^5.0.1",
-    "ralix": "^0.5.2"
+    "ralix": "github:ralixjs/ralix#templates"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"

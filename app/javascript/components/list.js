@@ -12,7 +12,11 @@ export default class List {
   }
 
   addItem(id, completed, value) {
-    insertHTML('ul', `<li id="li_${id}" class="${completed}"><div class="view">${this.checkBox(id, completed)}<label ondblclick=editItem('${id}')>${value}</label><button class="destroy" onclick="destroyItem('${id}')"></button></div></li>`, 'end')
+    insertHTML(
+      'ul',
+      render('todoItem', { id: id, completed: completed, value: value }),
+      'end'
+    )
   }
 
   removeItem(id) {
@@ -30,14 +34,13 @@ export default class List {
     iterate(findAll('.completed'), (obj) => { obj.remove() })
   }
 
-  checkBox(id, completed) {
-    const checked = completed != '' ? 'checked' : ''
-    return `<input class="toggle" type="checkbox" onclick="toggleCheck('${id}')" ${checked}>`
-  }
-
   toggleElement(id) {
     toggleClass(`#li_${id}`, 'completed')
     find(`#li_${id} input`).remove()
-    insertHTML(`#li_${id} div`, this.checkBox(id, find(`#li_${id}`).className), 'begin')
+    insertHTML(
+      `#li_${id} div`,
+      render('checkBox', { id: id, completed: find(`#li_${id}`).className }),
+      'begin'
+    )
   }
 }
