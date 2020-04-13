@@ -1,6 +1,4 @@
 export default class List {
-  constructor() {}
-
   load(list, name) {
     removeClass('.selected', 'selected')
     insertHTML('ul', '')
