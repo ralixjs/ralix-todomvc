@@ -865,10 +865,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@rails/webpacker@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@rails/webpacker/-/webpacker-5.0.1.tgz#f7bdb8d0b36e41aa2f219aad332f50194ad4fc46"
-  integrity sha512-r74Od+YO5OxkrePNLL9M3Mi3DQNPLSXkv+cGDdiFvTGeFc+VtI8j0sNGoulBMlEZFH8GVlb7LLy/FVLjPJq1/Q==
+"@rails/webpacker@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@rails/webpacker/-/webpacker-5.1.1.tgz#3c937aa719e46341f037a3f37349ef58085950df"
+  integrity sha512-ho5Stv9naZgG4HbHNFPqbA1OLPJyj6QXfgAc7VGCu4kkMe/RnVFLoLJFW6TZ9wYelKodBjRA2tKKiCaugv0sZw==
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -6033,10 +6033,10 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
   integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
 
-ralix@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/ralix/-/ralix-0.7.0.tgz#00462cbfc167c0d0aa5c42d4e293f9a801183c1d"
-  integrity sha512-kcdODaq1Ky6eILjjaC5pl0dTi+0ms7c7kd00FjIKZ1kgppwjU4pP5KJusTwLMZBES48gWsHQFe+mv6c3rMOvFw==
+ralix@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/ralix/-/ralix-0.7.2.tgz#37915bffe9f06e0d5ec07a4d2dbf215a35cd7cda"
+  integrity sha512-7/TOkscieznSw7wZWnnxDhCvXJqcAAUcy25emICBRrQ8yqyxRV8DmmQyfJRgM2hq4axAVvsVx2t/saqmqWqpYQ==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
