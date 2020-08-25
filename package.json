@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^5.1.1",
-    "ralix": "^0.7.2"
+    "ralix": "^0.8.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"

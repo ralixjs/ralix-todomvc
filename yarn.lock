@@ -6033,10 +6033,10 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
   integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
 
-ralix@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/ralix/-/ralix-0.7.2.tgz#37915bffe9f06e0d5ec07a4d2dbf215a35cd7cda"
-  integrity sha512-7/TOkscieznSw7wZWnnxDhCvXJqcAAUcy25emICBRrQ8yqyxRV8DmmQyfJRgM2hq4axAVvsVx2t/saqmqWqpYQ==
+ralix@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/ralix/-/ralix-0.8.0.tgz#64a3948625124275f3523ee9f589c12c226378dc"
+  integrity sha512-d7tD8k6ORW6ynBLVl5FnamF7FcHyjvMVZbEk8CpC1ebHf21uDXCD18Or5epUXmbWjoGrS1GUJ4QWcg63TAurjw==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
