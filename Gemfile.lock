@@ -161,10 +161,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  jsbundling-rails
+  jsbundling-rails (~> 1.0)
   puma (~> 5.6)
   rails (~> 7.0)
-  sprockets-rails
+  sprockets-rails (~> 3.4)
 
 RUBY VERSION
    ruby 2.7.2p137
