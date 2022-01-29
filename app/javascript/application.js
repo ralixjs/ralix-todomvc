@@ -1,7 +1,7 @@
 import { RalixApp } from 'ralix'
 
-import AppCtrl from 'controllers/app'
-import * as Templates from 'templates'
+import AppCtrl from './controllers/app'
+import * as Templates from './templates'
 
 const App = new RalixApp({
   routes: {

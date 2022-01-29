@@ -1,5 +1,5 @@
-import Storage from 'components/storage'
-import List    from 'components/list'
+import Storage from '../components/storage'
+import List    from '../components/list'
 
 export default class AppCtrl {
   constructor() {

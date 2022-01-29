@@ -1,11 +1,12 @@
 {
-  "name": "ralix_todomvc",
+  "name": "ralix-todomvc",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^5.2.2",
-    "ralix": "^0.8.1"
+    "ralix": "^0.9.0",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2"
   },
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.2"
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
   }
 }
