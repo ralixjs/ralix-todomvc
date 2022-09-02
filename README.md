@@ -2,7 +2,7 @@
 
 [TodoMVC](https://todomvc.com) implementation with Ralix, bundled with Parcel.
 
-See 🌐 [live version](https://ralix-todomvc.vercel.com).
+See 🌐 [live version](https://ralix-todomvc.netlify.app)!
 
 ## Install
 
