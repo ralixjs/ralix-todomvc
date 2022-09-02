@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ralix - TodoMVC</title>
+  <link href="./stylesheets/index.css" rel="stylesheet">
+</head>
+<body>
+  <section class="todoapp">
+    <header class="header">
+      <h1>todos</h1>
+      <input class="new-todo" placeholder="What needs to be done?" autofocus>
+    </header>
+    <section class="main">
+      <input id="toggle-all" class="toggle-all" type="checkbox" onclick="toggleCheck()">
+      <label for="toggle-all">Mark all as complete</label>
+      <ul class="todo-list">
+      </ul>
+    </section>
+    <footer class="footer">
+      <span class="todo-count"></span>
+      <ul class="filters">
+        <li>
+          <a href="#" class="selected" onclick="loadList('all')">All</a>
+        </li>
+        <li>
+          <a href="#" onclick="loadList('active')">Active</a>
+        </li>
+        <li>
+          <a href="#" onclick="loadList('completed')">Completed</a>
+        </li>
+      </ul>
+      <button class="clear-completed" onclick="clearCompleted()">Clear completed</button>
+    </footer>
+  </section>
+
+  <footer class="info">
+    <p>Double-click to edit a todo</p>
+    <p>Built with <a href="https://github.com/ralixjs/ralix">Ralix</a></p>
+    <p>Created by <a href="https://github.com/ralixjs">Ralix Team</a></p>
+  </footer>
+
+  <script type="module" src="./javascripts/index.js"></script>
+</body>
+</html>
