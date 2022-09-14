@@ -8,7 +8,7 @@ export default class AppCtrl {
     this.loadList('all')
 
     on('.new-todo', 'keyup', (e) => {
-      if (e.code !== 'Enter' || e.target.value == '')  return
+      if (e.code !== 'Enter' || e.target.value == '') return
 
       createItem(e.target.value)
       e.target.value = ''
