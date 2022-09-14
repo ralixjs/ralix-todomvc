@@ -13,13 +13,6 @@ export default class AppCtrl {
       createItem(e.target.value)
       e.target.value = ''
     })
-
-    on(window, 'click', (e) => {
-      const edit = find('input.edit')
-
-      if (edit && !edit.contains(e.target))
-        saveItem(edit)
-    })
   }
 
   saveItem(edit) {
@@ -90,6 +83,10 @@ export default class AppCtrl {
         input.remove()
         updateItem(id)
       }
+    })
+
+    on(input, 'focusout', (e) => {
+      saveItem(input)
     })
   }
 
