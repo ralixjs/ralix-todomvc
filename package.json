@@ -7,6 +7,6 @@
   },
   "devDependencies": {
     "parcel": "^2.7.0",
-    "ralix": "^0.10.0"
+    "ralix": "^1.0.0"
   }
 }
