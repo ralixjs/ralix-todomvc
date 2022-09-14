@@ -1363,6 +1363,11 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha512-qsdtZH+vMoCARQtyod4imc2nIJwg9Cc7lPRrw9CzF8ZKR0khdr8+2nX80PBhET3tcyTtJDxAffGh2rXH4tyU8A==
 
+todomvc-app-css@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/todomvc-app-css/-/todomvc-app-css-2.4.2.tgz#bb0f53a125ad079efdd2ca7ad692ddf39f39efa8"
+  integrity sha512-ViAkQ7ed89rmhFIGRsT36njN+97z8+s3XsJnB8E2IKOq+/SLD/6PtSvmTtiwUcVk39qPcjAc/OyeDys4LoJUVg==
+
 tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
