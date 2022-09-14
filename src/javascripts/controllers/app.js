@@ -16,6 +16,7 @@ export default class AppCtrl {
 
     on(window, 'click', (e) => {
       const edit = find('input.edit')
+
       if (edit && !edit.contains(e.target))
         saveItem(edit)
     })
@@ -24,6 +25,7 @@ export default class AppCtrl {
   saveItem(edit) {
     const id    = edit.parentElement.id.replace('li_', '')
     const value = edit.value
+
     removeClass(`#li_${id}`, 'editing')
     edit.remove()
 
@@ -59,6 +61,7 @@ export default class AppCtrl {
 
   destroyItem(id) {
     this.list.removeItem(id)
+
     const todo = iterate(getList(), (obj, index, list) => {
       if (obj.id == id.replace('li_', ''))
         list.splice(index, 1)
@@ -70,11 +73,9 @@ export default class AppCtrl {
 
   editItem(id) {
     const value = find(`#li_${id} label`).textContent
-    const input = document.createElement('input')
+    const input = elem('input', { class: 'edit', value: value})
 
     addClass(`#li_${id}`, 'editing')
-    input.className = 'edit'
-    input.value = value
     find(`#li_${id}`).appendChild(input)
     input.focus()
 
@@ -92,9 +93,10 @@ export default class AppCtrl {
     })
   }
 
-  toggleCheck(id = '') {
-    if (id == '') {
+  toggleCheck(id) {
+    if (id == 'all') {
       let all
+
       if (find('.todo-list li:not(.completed)'))
         all = findAll('.todo-list li:not(.completed)')
       else

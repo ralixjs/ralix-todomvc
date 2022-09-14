@@ -1263,10 +1263,10 @@ posthtml@^0.16.4, posthtml@^0.16.5:
     posthtml-parser "^0.11.0"
     posthtml-render "^3.0.0"
 
-ralix@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/ralix/-/ralix-0.10.0.tgz#d31925adaac17427d1466f46a1590c91cef73730"
-  integrity sha512-bYoA7m7Pb5CW0rzLptGww7gO3/7JDYI4jzTqazQbYV8YRN4bbAtR4qb+SoMWOHeQcwscyoR1x3WdJyL5jw8kSA==
+ralix@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ralix/-/ralix-1.0.0.tgz#71967543b9ebfa6c90e7c1fc1301bd194a400831"
+  integrity sha512-h/rdt/A14YobXxAEUjQTDs5AZ5X81VcP7tQBVC2U4DDJ9FSv03gK9n1/HdwzikZNFgbrGvB66nwF3yjMx7APrw==
 
 react-error-overlay@6.0.9:
   version "6.0.9"
