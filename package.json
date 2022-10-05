@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "parcel": "^2.7.0",
-    "ralix": "^1.1.0",
+    "ralix": "^1.1.1",
     "todomvc-app-css": "^2.4.2"
   }
 }

@@ -1270,10 +1270,10 @@ posthtml@^0.16.4, posthtml@^0.16.5:
     posthtml-parser "^0.11.0"
     posthtml-render "^3.0.0"
 
-ralix@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ralix/-/ralix-1.1.0.tgz#2177ac74702dc473d6983554a5d1ea51a2b2d2fa"
-  integrity sha512-k4UKm+pF29b4wYw42Xzs7qX+Tz77Gncmb2CreFJlDttI25Rf0gAc9dScmiOdbRoP7o39W2vqrWCh9fM8zaR85g==
+ralix@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ralix/-/ralix-1.1.1.tgz#a5dc3c91ea6a7e2e9bde5d2e699fb02ce74684d1"
+  integrity sha512-LqFyqH7/pd0ekpuZ/J8WSunLV/5P7yc8Et/w5ORa/Id0HKsOzwuTHd07MbYEtTdtc4j1GgVc/ehpmH+8PrBVHg==
 
 react-error-overlay@6.0.9:
   version "6.0.9"
