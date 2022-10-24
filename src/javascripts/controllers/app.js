@@ -16,16 +16,16 @@ export default class AppCtrl {
   }
 
   saveItem(edit) {
-    const id    = edit.parentElement.id.replace('li_', '')
+    const id    = edit.parentElement.id.replace('item_', '')
     const value = edit.value
 
-    removeClass(`#li_${id}`, 'editing')
+    removeClass(`#item_${id}`, 'editing')
     edit.remove()
 
     if (value == '') {
       this.destroyItem(id)
     } else {
-      find(`#li_${id} label`).textContent = value
+      find(`#item_${id} label`).textContent = value
       updateItem(id)
     }
   }
@@ -33,8 +33,8 @@ export default class AppCtrl {
   updateItem(id) {
     const todo = iterate(this.getList(), (obj, index, list) => {
       if (obj.id == id) {
-        list[index]['value'] = find(`#li_${id} label`).textContent
-        list[index]['class'] = find(`#li_${id}`).className
+        list[index]['value'] = find(`#item_${id} label`).textContent
+        list[index]['class'] = find(`#item_${id}`).className
       }
     })
     this.storage.set(todo)
@@ -56,7 +56,7 @@ export default class AppCtrl {
     this.list.removeItem(id)
 
     const todo = iterate(getList(), (obj, index, list) => {
-      if (obj.id == id.replace('li_', ''))
+      if (obj.id == id)
         list.splice(index, 1)
     })
 
@@ -65,22 +65,21 @@ export default class AppCtrl {
   }
 
   editItem(id) {
-    const value = find(`#li_${id} label`).textContent
+    const value = find(`#item_${id} label`).textContent
     const input = elem('input', { class: 'edit', value: value})
 
-    addClass(`#li_${id}`, 'editing')
-    find(`#li_${id}`).appendChild(input)
+    addClass(`#item_${id}`, 'editing')
+    find(`#item_${id}`).appendChild(input)
     input.focus()
 
     on(input, 'keyup', (e) => {
       if (e.code !== 'Enter') return
 
       if (input.value == '') {
-        this.destroyItem(id.replace('li_', ''))
+        this.destroyItem(id)
       } else {
-        removeClass(`#li_${id}`, 'editing')
-        find(`#li_${id} label`).textContent = input.value
-        input.remove()
+        removeClass(`#item_${id}`, 'editing')
+        find(`#item_${id} label`).textContent = input.value
         updateItem(id)
       }
     })
@@ -99,13 +98,13 @@ export default class AppCtrl {
       else
         all = findAll('.todo-list li.completed')
 
-      iterate(all, (obj) => { this.list.toggleElement(obj.id.replace('li_', '')) })
+      iterate(all, (obj) => { this.list.toggleElement(obj.id.replace('item_', '')) })
     } else {
       this.list.toggleElement(id)
     }
 
     const todo = iterate(getList(), (obj, index, list) => {
-      list[index]['class'] = find(`#li_${obj.id}`).className
+      list[index]['class'] = find(`#item_${obj.id}`).className
     })
 
     this.storage.set(todo)

@@ -18,7 +18,7 @@ export default class List {
   }
 
   removeItem(id) {
-    find(`#li_${id}`).remove()
+    find(`#item_${id}`).remove()
   }
 
   updateCounter(items) {
@@ -33,11 +33,11 @@ export default class List {
   }
 
   toggleElement(id) {
-    toggleClass(`#li_${id}`, 'completed')
-    find(`#li_${id} input`).remove()
+    toggleClass(`#item_${id}`, 'completed')
+    find(`#item_${id} input`).remove()
     insertHTML(
-      `#li_${id} div`,
-      render('checkBox', { id: id, completed: find(`#li_${id}`).className }),
+      `#item_${id} div`,
+      render('checkBox', { id: id, completed: find(`#item_${id}`).className }),
       'begin'
     )
   }

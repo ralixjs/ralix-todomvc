@@ -1,5 +1,5 @@
 export const todoItem = ({ id, completed, value}) => `
-  <li id="li_${id}" class="${completed}">
+  <li id="item_${id}" class="${completed}">
     <div class="view">
       ${render('checkBox', { id: id, completed: completed })}
       <label ondblclick=editItem('${id}')>${value}</label>
