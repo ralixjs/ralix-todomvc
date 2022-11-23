@@ -66,7 +66,7 @@ export default class AppCtrl {
 
   editItem(id) {
     const value = find(`#item_${id} label`).textContent
-    const input = elem('input', { class: 'edit', value: value})
+    const input = elem('input', { class: 'edit', value: value })
 
     addClass(`#item_${id}`, 'editing')
     find(`#item_${id}`).appendChild(input)
