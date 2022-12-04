@@ -1,5 +1,5 @@
 export default class Storage {
-  constructor(name = 'todos') {
+  constructor(name) {
     this.db = name
   }
 

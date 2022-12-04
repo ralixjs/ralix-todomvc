@@ -3,8 +3,9 @@ import List    from '../components/list'
 
 export default class AppCtrl {
   constructor() {
-    this.storage = new Storage()
+    this.storage = new Storage('todos')
     this.list    = new List()
+
     this.loadList('all')
 
     on('.new-todo', 'keyup', (e) => {
