@@ -10,11 +10,7 @@ export default class List {
   }
 
   addItem(id, completed, value) {
-    insertHTML(
-      'ul',
-      render('todoItem', { id: id, completed: completed, value: value }),
-      'end'
-    )
+    insertTemplate('ul', 'todoItem', { id: id, completed: completed, value: value }, 'end')
   }
 
   removeItem(id) {
@@ -35,10 +31,6 @@ export default class List {
   toggleElement(id) {
     toggleClass(`#item_${id}`, 'completed')
     find(`#item_${id} input`).remove()
-    insertHTML(
-      `#item_${id} div`,
-      render('checkBox', { id: id, completed: find(`#item_${id}`).className }),
-      'begin'
-    )
+    insertTemplate(`#item_${id} div`, 'checkBox', { id: id, completed: find(`#item_${id}`).className }, 'begin')
   }
 }
